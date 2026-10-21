@@ -1,0 +1,60 @@
+name: Build TV Home on any version tag
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build release APK with R8
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build release APK with R8
+        shell: bash
+        run: |
+          set -euo pipefail
+          WRAPPER="$(find . -type f -name gradlew -not -path '*/.gradle/*' | head -n 1)"
+          test -n "$WRAPPER"
+          PROJECT_DIR="$(dirname "$WRAPPER")"
+          chmod +x "$WRAPPER"
+          VERSION="${GITHUB_REF_NAME#v}"
+          (
+            cd "$PROJECT_DIR"
+            ./gradlew --no-daemon clean assembleRelease
+            APK_PATH="$(find app/build/outputs/apk -type f -path '*/release/*.apk' ! -name '*androidTest*' | head -n 1)"
+            test -n "$APK_PATH"
+            cp "$APK_PATH" "$GITHUB_WORKSPACE/TV-Home-${VERSION}.apk"
+          )
+          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TV-Home-${{ env.VERSION }}
+          path: TV-Home-${{ env.VERSION }}.apk
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: TV Home ${{ env.VERSION }}
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: TV-Home-${{ env.VERSION }}.apk
