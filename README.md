@@ -14,10 +14,10 @@ Many Android TV devices don't offer a simple setting to choose a custom launcher
 
 ## Making TV-HOME the default launcher
 
-Some TVs provide a setting for choosing the default Home app; others do not. If your TV has no such setting, you can look into Launcher Manager and the XDA discussion linked below.
+Most of the TVs brands not provide a setting for choosing custem launcher as the default Home app; you can look into Launcher Manager and the XDA discussion linked below.
 
 1. First, install TV-HOME and confirm that it opens correctly.
-2. Read the [Launcher Manager XDA thread](https://xdaforums.com/t/app-firetv-noroot-launcher-manager-change-launcher-without-root.4176349/) carefully and check whether its instructions and app version support your specific TV and firmware. The thread is focused on Fire TV, so compatibility with Android TV devices is not guaranteed.
+2. Read the [Launcher Manager XDA thread](https://xdaforums.com/t/app-firetv-noroot-launcher-manager-change-launcher-without-root.4176349/) carefully and check whether its instructions and app version support your specific TV and firmware.
 3. Follow only the setup steps documented for your compatible device and Launcher Manager version. Some methods require Developer Options, USB debugging, ADB, or granting additional permissions.
 4. If Launcher Manager offers a supported way to select a Home app, choose TV-HOME and test the Home button.
 
