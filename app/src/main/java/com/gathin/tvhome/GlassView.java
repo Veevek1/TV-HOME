@@ -51,24 +51,30 @@ public class GlassView extends View {
     protected void onDraw(Canvas canvas) {
         float inset = 6f * density;   // room for the glow
         rect.set(inset, inset, getWidth() - inset, getHeight() - inset);
+        if (rect.width() <= 0f || rect.height() <= 0f) return;
+
+        // Keep the corner curve identical on all four corners and valid for this tile size.
+        // The highlight's inner rectangle matches the scaled tile; the inset is only glow space.
+        float corner = Math.max(0f, Math.min(radius,
+                Math.min(rect.width(), rect.height()) * 0.5f));
 
         // Outer glow: three widening, fading strokes.
         for (int i = 1; i <= 3; i++) {
             glow.setStrokeWidth(i * 2f * density);
             glow.setColor((0x30 / i) << 24 | 0xFFFFFF);
             float o = i * density;
-            canvas.drawRoundRect(rect.left - o, rect.top - o, rect.right + o, rect.bottom + o, radius + o, radius + o, glow);
+            canvas.drawRoundRect(rect.left - o, rect.top - o, rect.right + o, rect.bottom + o, corner + o, corner + o, glow);
         }
 
-        canvas.drawRoundRect(rect, radius, radius, fill);
+        canvas.drawRoundRect(rect, corner, corner, fill);
 
         clip.reset();
-        clip.addRoundRect(rect, radius, radius, Path.Direction.CW);
+        clip.addRoundRect(rect, corner, corner, Path.Direction.CW);
         canvas.save();
         canvas.clipPath(clip);
         canvas.drawRect(rect.left, rect.top, rect.right, rect.top + rect.height() * 0.45f, specular);
         canvas.restore();
 
-        canvas.drawRoundRect(rect, radius, radius, rim);
+        canvas.drawRoundRect(rect, corner, corner, rim);
     }
 }
