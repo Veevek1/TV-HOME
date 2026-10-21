@@ -1,6 +1,6 @@
 # TV-HOME
 
-TV-HOME is a modified version of [CleanYourTV](https://github.com/Gathin23/cleanyourtv), with changes made according to my personal needs. These include some UI changes and new features.
+TV-HOME is a modified version of [CleanYourTV](https://github.com/Gathin23/cleanyourtv), with changes made according to my personal needs. These include some minor UI changes and new features.
 
 I made this project available as a ready-to-install APK for people who just want to try the launcher without building it themselves. Not everyone has a PC or computer, and some people aren't comfortable using ADB commands or disabling system apps because they're worried about accidentally breaking their family's TV.
 
