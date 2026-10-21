@@ -25,7 +25,7 @@ Most of the TV brands not provide a setting for choosing custem launcher as the 
 
 ## Credits
 
-TV-HOME is based on [CleanYourTV](https://github.com/Gathin23/cleanyourtv) by [Gathin23](https://github.com/Gathin23). Thanks to the original developer for sharing the source code.
+TV-HOME is based on [CleanYourTV](https://github.com/Gathin23/cleanyourtv) by [Gathin23](https://github.com/Gathin23).
 
 For information about launcher manager, see the [Launcher Manager discussion on XDA Developers](https://xdaforums.com/t/app-firetv-noroot-launcher-manager-change-launcher-without-root.4176349/).
 
